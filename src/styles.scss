@@ -16,3 +16,10 @@ body {
   color: var(--body-text-color) !important;
   display: contents;
 }
+
+.bg-theme-secondary {
+  background-color: var(--secondary-color);
+}
+.text-theme-primary {
+  background-color: var(--primary-color);
+}
