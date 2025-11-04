@@ -7,7 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "prettier:fix": "prettier --write ."
+    "prettier:fix": "prettier --write .",
+    "build:prod": "dotenv -e .env -- node tools/set-env.ts && ng build --prod"
   },
   "private": true,
   "dependencies": {
@@ -15,11 +16,13 @@
     "@angular/common": "^14.2.0",
     "@angular/compiler": "^14.2.0",
     "@angular/core": "^14.2.0",
+    "@angular/fire": "^7.6.1",
     "@angular/forms": "^14.2.0",
     "@angular/platform-browser": "^14.2.0",
     "@angular/platform-browser-dynamic": "^14.2.0",
     "@angular/router": "^14.2.0",
     "bootstrap": "^5.3.8",
+    "firebase": "^9.23.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
@@ -30,6 +33,9 @@
     "@angular/compiler-cli": "^14.2.0",
     "@types/jasmine": "~4.0.0",
     "@types/node": "^20.11.30",
+    "dotenv": "^17.2.3",
+    "dotenv-cli": "^11.0.0",
+    "dotenv-expand": "^12.0.3",
     "jasmine-core": "~4.3.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.1.0",
