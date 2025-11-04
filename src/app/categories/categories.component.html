@@ -8,13 +8,19 @@
             Create a category to organize your content
           </p>
 
-          <form class="row g-3">
+          <form
+            class="row g-3"
+            #categoryForm="ngForm"
+            (ngSubmit)="addCategory()"
+          >
             <div class="col-12 col-md-9">
               <input
                 type="text"
+                name="category"
                 class="form-control form-control-lg rounded-3 shadow-sm border-0 category-input"
                 placeholder="Enter category name"
                 required
+                [(ngModel)]="categoryName"
               />
               <div class="invalid-feedback">
                 Please provide a category name.
@@ -26,7 +32,13 @@
                 type="submit"
                 class="btn btn-lg text-white rounded-3 fw-semibold category-btn"
               >
-                <i class="bi bi-plus-circle me-1"></i> Add
+                <ng-container *ngIf="!isLoading; else loading">
+                  Add
+                </ng-container>
+
+                <ng-template #loading>
+                  <i class="fa-solid fa-spinner fa-spin me-2"></i>
+                </ng-template>
               </button>
             </div>
           </form>
