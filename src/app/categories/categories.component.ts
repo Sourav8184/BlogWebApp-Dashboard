@@ -12,6 +12,7 @@ import { CategoriesService } from '../service/categories.service';
 export class CategoriesComponent implements OnInit {
   categoryName: string = '';
   isLoading: boolean = false;
+  categories: Category[] = [];
 
   constructor(
     private readonly categoriesService: CategoriesService,
@@ -19,7 +20,9 @@ export class CategoriesComponent implements OnInit {
     private readonly translate: TranslateService,
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.loadCategories();
+  }
 
   async addCategory() {
     if (!this.categoryName.trim()) {
@@ -34,13 +37,18 @@ export class CategoriesComponent implements OnInit {
 
     try {
       this.isLoading = true;
-      const categoryRef = await this.categoriesService.addCategory(category);
+      await this.categoriesService.addCategory(category);
       this.toastr.success(this.translate.instant('CATEGORY_ADDED'));
       this.categoryName = '';
     } catch (error) {
       this.toastr.error(this.translate.instant('CATEGORY_ERROR'));
-    } finally {
-      this.isLoading = false;
     }
+  }
+
+  loadCategories() {
+    this.categoriesService.getCategories().subscribe((data) => {
+      this.categories = data;
+      this.isLoading = false;
+    });
   }
 }

@@ -46,4 +46,59 @@
       </div>
     </div>
   </div>
+  <div class="row mt-5 mb-5">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+      <div class="card shadow-effect category-table-card mt-5 mb-5">
+        <div class="card-body p-4">
+          <h5 class="fw-bold mb-3 text-center">Category List</h5>
+
+          <table class="table custom-table align-middle">
+            <thead>
+              <tr>
+                <th class="col-index text-center">No</th>
+                <th class="col-name">Category Name</th>
+                <th class="col-name">Date</th>
+                <th class="col-actions text-center">Actions</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let cat of categories; let i = index">
+                <td class="text-center">{{ i + 1 }}</td>
+                <td class="fw-semibold text-capitalize">{{ cat.name }}</td>
+                <td class="fw-semibold">
+                  {{ cat.createdAt | date: "dd MMM yyyy" }}
+                </td>
+                <td class="text-center">
+                  <button
+                    class="btn btn-sm btn-light shadow-sm table-action-btn me-2"
+                    aria-label="Edit category"
+                    title="Edit"
+                  >
+                    <i class="fa-solid fa-pen"></i>
+                  </button>
+
+                  <button
+                    class="btn btn-sm btn-danger shadow-sm table-action-btn"
+                    aria-label="Delete category"
+                    title="Delete"
+                  >
+                    <i class="fa-solid fa-trash"></i>
+                  </button>
+                </td>
+              </tr>
+
+              <tr *ngIf="categories.length === 0">
+                <td colspan="3" class="text-center text-muted py-4">
+                  No categories added yet.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2"></div>
+  </div>
 </div>
