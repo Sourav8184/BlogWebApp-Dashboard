@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Category } from '../interfaces/categories.interfact';
+import { ToastrService } from 'ngx-toastr';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-categories',
@@ -11,12 +13,19 @@ export class CategoriesComponent implements OnInit {
   categoryName: string = '';
   isLoading: boolean = false;
 
-  constructor(private firestore: AngularFirestore) {}
+  constructor(
+    private firestore: AngularFirestore,
+    private readonly toastr: ToastrService,
+    private readonly translate: TranslateService,
+  ) {}
 
   ngOnInit(): void {}
 
   async addCategory() {
-    if (!this.categoryName.trim()) return;
+    if (!this.categoryName.trim()) {
+      this.toastr.warning(this.translate.instant('CATEGORY_EMPTY'));
+      return;
+    }
 
     const category: Category = {
       name: this.categoryName.trim(),
@@ -76,10 +85,11 @@ export class CategoriesComponent implements OnInit {
         .add(moreSubCategory);
 
        */
-
+      this.toastr.success(this.translate.instant('CATEGORY_ADDED'));
       this.categoryName = '';
     } catch (error) {
       console.error('❌ Error adding category:', error);
+      this.toastr.error(this.translate.instant('CATEGORY_ERROR'));
     } finally {
       this.isLoading = false;
     }
