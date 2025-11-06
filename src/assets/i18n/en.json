@@ -1,5 +1,5 @@
 {
-  "CATEGORY_ADDED": "✅ Category added successfully!",
-  "CATEGORY_EMPTY": "⚠️ Please enter a category name.",
-  "CATEGORY_ERROR": "❌ Something went wrong while adding category."
+  "CATEGORY_ADDED": "Category added successfully!",
+  "CATEGORY_EMPTY": "Please enter a category name.",
+  "CATEGORY_ERROR": "Something went wrong while adding category."
 }
