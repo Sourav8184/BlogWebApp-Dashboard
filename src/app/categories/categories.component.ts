@@ -55,6 +55,8 @@ export class CategoriesComponent implements OnInit {
       this.categoryName = '';
     } catch (error) {
       this.toastr.error(this.translate.instant('CATEGORY_ERROR'));
+    } finally {
+      this.isLoading = false;
     }
   }
 
@@ -65,15 +67,17 @@ export class CategoriesComponent implements OnInit {
     });
   }
 
-  deleteCategory(category: Category) {
-    this.categoriesService
-      .deleteCategory(category.id!)
-      .then(() => {
-        this.toastr.success(this.translate.instant('CATEGORY_DELETED'));
-      })
-      .catch(() => {
-        this.toastr.error(this.translate.instant('CATEGORY_ERROR'));
-      });
+  async deleteCategory(category: Category) {
+    this.isLoading = true;
+
+    try {
+      await this.categoriesService.deleteCategory(category.id!);
+      this.toastr.success(this.translate.instant('CATEGORY_DELETED'));
+    } catch (error) {
+      this.toastr.error(this.translate.instant('CATEGORY_ERROR'));
+    } finally {
+      this.isLoading = false;
+    }
   }
 
   editCategory(cat: Category) {
