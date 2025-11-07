@@ -34,10 +34,10 @@ export class CategoriesService {
   }
 
   editCategory(id: string, updatedData: Partial<Category>) {
-    return this.firestore.collection('categories').doc(id).update(updatedData);
+    return this.firestore.doc(`categories/${id}`).update(updatedData);
   }
 
   deleteCategory(id: string) {
-    return this.firestore.collection('categories').doc(id).delete();
+    return this.firestore.doc(`categories/${id}`).delete();
   }
 }
