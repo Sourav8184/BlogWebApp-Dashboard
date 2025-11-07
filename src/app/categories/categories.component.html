@@ -3,9 +3,15 @@
     <div class="col-md-8">
       <div class="card category-card-custom">
         <div class="card-body p-4">
-          <h3 class="category-title text-center fw-bold mb-2">New Category</h3>
+          <h3 class="category-title text-center fw-bold mb-2">
+            {{
+              (editingCategory ? "UPDATE_CATEGORY_TITLE" : "ADD_CATEGORY_TITLE")
+                | translate
+            }}
+          </h3>
+
           <p class="text-center text-muted mb-4">
-            Create a category to organize your content
+            {{ "ADD_CATEGORY_SUBTITLE" | translate }}
           </p>
 
           <form
@@ -18,12 +24,12 @@
                 type="text"
                 name="category"
                 class="form-control form-control-lg rounded-3 shadow-sm border-0 category-input"
-                placeholder="Enter category name"
+                placeholder="{{ 'CATEGORY_PLACEHOLDER' | translate }}"
                 required
                 [(ngModel)]="categoryName"
               />
               <div class="invalid-feedback">
-                Please provide a category name.
+                {{ "CATEGORY_EMPTY" | translate }}
               </div>
             </div>
 
@@ -33,7 +39,12 @@
                 class="btn btn-lg text-white rounded-3 fw-semibold category-btn"
               >
                 <ng-container *ngIf="!isLoading; else loading">
-                  Add
+                  <ng-container *ngIf="!editingCategory; else editingText">
+                    {{ "ADD" | translate }}
+                  </ng-container>
+                  <ng-template #editingText>
+                    {{ "UPDATE" | translate }}
+                  </ng-template>
                 </ng-container>
 
                 <ng-template #loading>
@@ -41,25 +52,40 @@
                 </ng-template>
               </button>
             </div>
+
+            <div class="col-12 d-grid" *ngIf="editingCategory">
+              <button
+                type="button"
+                class="btn btn-outline-secondary btn-lg rounded-3 fw-semibold mt-2"
+                (click)="cancelEdit()"
+              >
+                {{ "CANCEL" | translate }}
+              </button>
+            </div>
           </form>
         </div>
       </div>
     </div>
   </div>
+
   <div class="row mt-5 mb-5">
     <div class="col-md-2"></div>
     <div class="col-md-8">
       <div class="card shadow-effect category-table-card mt-5 mb-5">
         <div class="card-body p-4">
-          <h5 class="fw-bold mb-3 text-center">Category List</h5>
+          <h5 class="fw-bold mb-3 text-center">
+            {{ "CATEGORY_LIST" | translate }}
+          </h5>
 
           <table class="table custom-table align-middle">
             <thead>
               <tr>
-                <th class="col-index text-center">No</th>
-                <th class="col-name">Category Name</th>
-                <th class="col-name">Date</th>
-                <th class="col-actions text-center">Actions</th>
+                <th class="col-index text-center">{{ "NO" | translate }}</th>
+                <th class="col-name">{{ "CATEGORY_NAME" | translate }}</th>
+                <th class="col-name">{{ "DATE" | translate }}</th>
+                <th class="col-actions text-center">
+                  {{ "ACTIONS" | translate }}
+                </th>
               </tr>
             </thead>
 
@@ -74,7 +100,8 @@
                   <button
                     class="btn btn-sm btn-light shadow-sm table-action-btn me-2"
                     aria-label="Edit category"
-                    title="Edit"
+                    title="{{ 'EDIT' | translate }}"
+                    (click)="editCategory(cat)"
                   >
                     <i class="fa-solid fa-pen"></i>
                   </button>
@@ -82,7 +109,8 @@
                   <button
                     class="btn btn-sm btn-danger shadow-sm table-action-btn"
                     aria-label="Delete category"
-                    title="Delete"
+                    title="{{ 'DELETE' | translate }}"
+                    (click)="deleteCategory(cat)"
                   >
                     <i class="fa-solid fa-trash"></i>
                   </button>
@@ -90,8 +118,8 @@
               </tr>
 
               <tr *ngIf="categories.length === 0">
-                <td colspan="3" class="text-center text-muted py-4">
-                  No categories added yet.
+                <td colspan="4" class="text-center text-muted py-4">
+                  {{ "NO_CATEGORY" | translate }}
                 </td>
               </tr>
             </tbody>

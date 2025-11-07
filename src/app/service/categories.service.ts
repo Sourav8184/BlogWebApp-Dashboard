@@ -32,4 +32,12 @@ export class CategoriesService {
         ),
       );
   }
+
+  editCategory(id: string, updatedData: Partial<Category>) {
+    return this.firestore.collection('categories').doc(id).update(updatedData);
+  }
+
+  deleteCategory(id: string) {
+    return this.firestore.collection('categories').doc(id).delete();
+  }
 }

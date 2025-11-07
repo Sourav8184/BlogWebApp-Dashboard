@@ -1,5 +1,33 @@
 {
+  "ADD_CATEGORY_TITLE": "Add Category",
+  "UPDATE_CATEGORY_TITLE": "Update Category",
+  "ADD_CATEGORY_SUBTITLE": "Create a category to organize your content",
+  "CATEGORY_PLACEHOLDER": "Enter category name",
+
+  "ADD": "Add",
+  "UPDATE": "Update",
+  "CANCEL": "Cancel",
+
+  "NO": "No",
+  "CATEGORY_NAME": "Category Name",
+  "DATE": "Date",
+  "ACTIONS": "Actions",
+  "CATEGORY_LIST": "Category List",
+  "NO_CATEGORY": "No categories added yet.",
+
+  "EDIT": "Edit",
+  "DELETE": "Delete",
+
   "CATEGORY_ADDED": "Category added successfully!",
+  "CATEGORY_UPDATED": "Category updated successfully!",
+  "CATEGORY_DELETED": "Category deleted successfully!",
   "CATEGORY_EMPTY": "Please enter a category name.",
-  "CATEGORY_ERROR": "Something went wrong while adding category."
+  "CATEGORY_ERROR": "Something went wrong, please try again.",
+
+  "DASH_CATEGORIES_TITLE": "Categories",
+  "DASH_CATEGORIES_DESC": "Manage your category details here",
+
+  "SITE_LOGO": "Sourav's Blog",
+  "FOOTER_COPYRIGHT": "Copyright © 2026 Angular Blog Website.",
+  "HEADER_WORKS": "Header works!"
 }
