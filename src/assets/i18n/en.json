@@ -2,6 +2,7 @@
   "ADD_CATEGORY_TITLE": "Add Category",
   "UPDATE_CATEGORY_TITLE": "Update Category",
   "ADD_CATEGORY_SUBTITLE": "Create a category to organize your content",
+  "UPDATE_CATEGORY_SUBTITLE": "Update the category details below.",
   "CATEGORY_PLACEHOLDER": "Enter category name",
 
   "ADD": "Add",
