@@ -50,7 +50,8 @@
               </label>
               <textarea
                 id="postExcerpt"
-                rows="4"
+                rows="11"
+                cols="10"
                 class="form-control"
                 placeholder="{{ 'POST_EXCERPT_PLACEHOLDER' | translate }}"
               ></textarea>
@@ -75,10 +76,17 @@
             <label for="postImage" class="form-label fw-semibold">
               {{ "POST_IMAGE" | translate }}
             </label>
+
+            <div class="image-preview-container mb-2">
+              <img [src]="imgSrc" alt="Preview" class="img-preview" />
+            </div>
+
             <input
               id="postImage"
               type="file"
               class="form-control form-control-lg"
+              accept="image/*"
+              (change)="showPreview($event)"
             />
           </div>
         </div>

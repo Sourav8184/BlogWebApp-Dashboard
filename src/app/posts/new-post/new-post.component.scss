@@ -8,6 +8,15 @@
     color: var(--body-text-color);
   }
 
+  .img-preview {
+    width: 100%;
+    height: auto;
+    max-height: 250px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+  }
+
   .post-title {
     color: var(--primary-color);
   }
