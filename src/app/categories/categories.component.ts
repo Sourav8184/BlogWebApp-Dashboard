@@ -36,9 +36,14 @@ export class CategoriesComponent implements OnInit {
     try {
       if (this.editingCategory) {
         // ✅ UPDATE MODE
-        await this.categoriesService.editCategory(this.editingCategory.id!, {
+        const updatedCategory: Partial<Category> = {
           name: this.categoryName.trim(),
-        });
+        };
+        this.categoryName = '';
+        await this.categoriesService.editCategory(
+          this.editingCategory.id!,
+          updatedCategory,
+        );
 
         this.toastr.success(this.translate.instant('CATEGORY_UPDATED'));
         this.editingCategory = null;
@@ -48,11 +53,10 @@ export class CategoriesComponent implements OnInit {
           name: this.categoryName.trim(),
           createdAt: new Date(),
         };
+        this.categoryName = '';
         await this.categoriesService.addCategory(category);
         this.toastr.success(this.translate.instant('CATEGORY_ADDED'));
       }
-
-      this.categoryName = '';
     } catch (error) {
       this.toastr.error(this.translate.instant('CATEGORY_ERROR'));
     } finally {
