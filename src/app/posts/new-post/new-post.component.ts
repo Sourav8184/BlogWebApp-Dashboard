@@ -13,6 +13,7 @@ export class NewPostComponent implements OnInit {
   imgSrc: string = DEFAULT_POST_IMAGE;
   categories: Category[] = [];
   selectedCategory: string = '';
+  editorContent: string = '';
 
   constructor(private readonly categoriesService: CategoriesService) {}
 

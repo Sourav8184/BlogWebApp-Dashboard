@@ -109,11 +109,7 @@
             <label for="postContent" class="form-label fw-semibold">
               {{ "POST_CONTENT" | translate }}
             </label>
-            <textarea
-              id="postContent"
-              rows="12"
-              class="form-control"
-            ></textarea>
+            <quill-editor [(ngModel)]="editorContent"></quill-editor>
           </div>
         </div>
       </div>
