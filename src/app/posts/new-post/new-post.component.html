@@ -25,6 +25,7 @@
                 type="text"
                 class="form-control form-control-lg"
                 placeholder="{{ 'POST_TITLE_PLACEHOLDER' | translate }}"
+                (keyup)="onTitleChange($event)"
               />
             </div>
 
@@ -37,6 +38,9 @@
                 type="text"
                 class="form-control form-control-lg"
                 placeholder="{{ 'POST_PERMALINK_PLACEHOLDER' | translate }}"
+                [(ngModel)]="permalink"
+                name="permalink"
+                readonly
               />
             </div>
 

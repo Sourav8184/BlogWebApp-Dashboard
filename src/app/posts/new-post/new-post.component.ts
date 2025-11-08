@@ -7,6 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NewPostComponent implements OnInit {
   constructor() {}
+  permalink: string = '';
 
   ngOnInit(): void {}
+
+  onTitleChange(event: Event): void {
+    const inputElement = event.target as HTMLInputElement;
+    const title = inputElement.value;
+    this.permalink = title.trim().toLowerCase().replace(/\s+/g, '-');
+  }
 }
