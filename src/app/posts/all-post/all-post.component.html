@@ -1,0 +1,32 @@
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <div class="card shadow-effect bg-secondary-theme border-0 rounded-4">
+        <div class="card-body text-center py-5">
+          <h3 class="fw-bold text-theme mb-2 blog-title">
+            {{ "BLOG_POSTS_TITLE" | translate }}
+          </h3>
+
+          <p class="text-muted mb-4">
+            {{ "BLOG_POSTS_SUBTITLE" | translate }}
+          </p>
+
+          <div class="d-flex justify-content-center gap-3">
+            <button
+              class="btn btn-lg btn-theme-primary text-white px-4"
+              routerLink="/posts/new"
+            >
+              <i class="fa-solid fa-plus me-2"></i>
+              {{ "ADD_NEW_POST" | translate }}
+            </button>
+
+            <button class="btn btn-theme-light btn-lg px-4" routerLink="/">
+              <i class="fa-solid fa-arrow-left me-2"></i>
+              {{ "BACK_TO_DASHBOARD" | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,119 @@
+<div class="add-post container py-5">
+  <div class="row mb-4 text-center">
+    <div class="col">
+      <h3 class="fw-bold post-title">
+        {{ "ADD_NEW_POST" | translate }}
+      </h3>
+      <p class="text-muted">
+        {{ "ADD_NEW_POST_SUBTITLE" | translate }}
+      </p>
+    </div>
+  </div>
+
+  <form>
+    <div class="row g-4">
+      <!-- LEFT SIDE -->
+      <div class="col-md-7">
+        <div class="card shadow-effect bg-theme-secondary rounded-4">
+          <div class="card-body p-4">
+            <div class="mb-3">
+              <label for="postTitle" class="form-label fw-semibold">
+                {{ "POST_TITLE" | translate }}
+              </label>
+              <input
+                id="postTitle"
+                type="text"
+                class="form-control form-control-lg"
+                placeholder="{{ 'POST_TITLE_PLACEHOLDER' | translate }}"
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="postPermalink" class="form-label fw-semibold">
+                {{ "POST_PERMALINK" | translate }}
+              </label>
+              <input
+                id="postPermalink"
+                type="text"
+                class="form-control form-control-lg"
+                placeholder="{{ 'POST_PERMALINK_PLACEHOLDER' | translate }}"
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="postExcerpt" class="form-label fw-semibold">
+                {{ "POST_EXCERPT" | translate }}
+              </label>
+              <textarea
+                id="postExcerpt"
+                rows="4"
+                class="form-control"
+                placeholder="{{ 'POST_EXCERPT_PLACEHOLDER' | translate }}"
+              ></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT SIDE -->
+      <div class="col-md-5">
+        <div class="card shadow-effect bg-theme-secondary rounded-4 p-4">
+          <div class="mb-3">
+            <label for="postCategory" class="form-label fw-semibold">
+              {{ "POST_CATEGORY" | translate }}
+            </label>
+            <select id="postCategory" class="form-control form-control-lg">
+              <option value="">{{ "POST_CATEGORY_SELECT" | translate }}</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label for="postImage" class="form-label fw-semibold">
+              {{ "POST_IMAGE" | translate }}
+            </label>
+            <input
+              id="postImage"
+              type="file"
+              class="form-control form-control-lg"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="row mt-4">
+      <div class="col">
+        <div class="card shadow-effect rounded-4">
+          <div class="card-body p-4">
+            <label for="postContent" class="form-label fw-semibold">
+              {{ "POST_CONTENT" | translate }}
+            </label>
+            <textarea
+              id="postContent"
+              rows="12"
+              class="form-control"
+            ></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUTTONS -->
+    <div class="d-flex justify-content-center gap-3 mt-4">
+      <button type="submit" class="btn btn-lg btn-theme-primary px-4">
+        <i class="fa-solid fa-floppy-disk me-2"></i>
+        {{ "SAVE_POST" | translate }}
+      </button>
+
+      <button
+        type="button"
+        class="btn btn-theme-light btn-lg px-4"
+        routerLink="/posts"
+      >
+        <i class="fa-solid fa-arrow-left me-2"></i>
+        {{ "BACK_TO_POSTS" | translate }}
+      </button>
+    </div>
+  </form>
+</div>

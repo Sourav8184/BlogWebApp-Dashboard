@@ -45,9 +45,11 @@
               >
                 <ng-container *ngIf="!isLoading; else loading">
                   <ng-container *ngIf="!editingCategory; else editingText">
+                    <i class="fa-solid fa-plus me-2"></i>
                     {{ "ADD" | translate }}
                   </ng-container>
                   <ng-template #editingText>
+                    <i class="fa-solid fa-pen-to-square me-2"></i>
                     {{ "UPDATE" | translate }}
                   </ng-template>
                 </ng-container>
