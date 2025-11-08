@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DEFAULT_POST_IMAGE } from 'src/app/constants/image-paths';
 import { Category } from 'src/app/interfaces/categories.interfact';
 import { CategoriesService } from 'src/app/service/categories.service';
@@ -9,22 +10,31 @@ import { CategoriesService } from 'src/app/service/categories.service';
   styleUrls: ['./new-post.component.scss'],
 })
 export class NewPostComponent implements OnInit {
-  permalink: string = '';
+  postForm!: FormGroup;
   imgSrc: string = DEFAULT_POST_IMAGE;
   categories: Category[] = [];
-  selectedCategory: string = '';
-  editorContent: string = '';
 
-  constructor(private readonly categoriesService: CategoriesService) {}
+  constructor(
+    private readonly categoriesService: CategoriesService,
+    private readonly fb: FormBuilder,
+  ) {}
 
   ngOnInit(): void {
+    this.postForm = this.fb.group({
+      title: ['', [Validators.required, Validators.minLength(5)]],
+      permalink: [{ value: '', disabled: true }],
+      excerpt: ['', Validators.required, Validators.maxLength(200)],
+      category: ['', Validators.required],
+      content: ['', Validators.required],
+    });
+
     this.loadCategories();
   }
 
   onTitleChange(event: Event): void {
-    const inputElement = event.target as HTMLInputElement;
-    const title = inputElement.value;
-    this.permalink = title.trim().toLowerCase().replace(/\s+/g, '-');
+    const title = (event.target as HTMLInputElement).value;
+    const permalink = title.trim().toLowerCase().replace(/\s+/g, '-');
+    this.postForm.patchValue({ permalink });
   }
 
   showPreview(event: Event): void {
@@ -38,9 +48,25 @@ export class NewPostComponent implements OnInit {
     }
   }
 
-  loadCategories() {
+  loadCategories(): void {
     this.categoriesService.getCategories().subscribe((data) => {
       this.categories = data;
     });
+  }
+
+  submitPost(): void {
+    if (this.postForm.invalid) {
+      this.postForm.markAllAsTouched();
+      return;
+    }
+
+    const postData = {
+      ...this.postForm.getRawValue(),
+      imagePreview: this.imgSrc,
+    };
+
+    // You can remove reset if you don't want to clear UI
+    this.postForm.reset();
+    this.imgSrc = DEFAULT_POST_IMAGE;
   }
 }
