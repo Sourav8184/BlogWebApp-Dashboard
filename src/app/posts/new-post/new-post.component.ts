@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DEFAULT_POST_IMAGE } from 'src/app/constants/image-paths';
+import { Category } from 'src/app/interfaces/categories.interfact';
+import { CategoriesService } from 'src/app/service/categories.service';
 
 @Component({
   selector: 'app-new-post',
@@ -7,11 +9,16 @@ import { DEFAULT_POST_IMAGE } from 'src/app/constants/image-paths';
   styleUrls: ['./new-post.component.scss'],
 })
 export class NewPostComponent implements OnInit {
-  constructor() {}
   permalink: string = '';
   imgSrc: string = DEFAULT_POST_IMAGE;
+  categories: Category[] = [];
+  selectedCategory: string = '';
 
-  ngOnInit(): void {}
+  constructor(private readonly categoriesService: CategoriesService) {}
+
+  ngOnInit(): void {
+    this.loadCategories();
+  }
 
   onTitleChange(event: Event): void {
     const inputElement = event.target as HTMLInputElement;
@@ -28,5 +35,11 @@ export class NewPostComponent implements OnInit {
       };
       reader.readAsDataURL(input.files[0]);
     }
+  }
+
+  loadCategories() {
+    this.categoriesService.getCategories().subscribe((data) => {
+      this.categories = data;
+    });
   }
 }

@@ -67,8 +67,16 @@
             <label for="postCategory" class="form-label fw-semibold">
               {{ "POST_CATEGORY" | translate }}
             </label>
-            <select id="postCategory" class="form-control form-control-lg">
+            <select
+              id="postCategory"
+              class="form-control form-control-lg"
+              [(ngModel)]="selectedCategory"
+              name="category"
+            >
               <option value="">{{ "POST_CATEGORY_SELECT" | translate }}</option>
+              <option *ngFor="let cat of categories" [value]="cat.id">
+                {{ cat.name }}
+              </option>
             </select>
           </div>
 
