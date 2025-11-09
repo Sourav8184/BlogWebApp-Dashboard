@@ -52,5 +52,11 @@
 
   "SITE_LOGO": "Sourav's Blog",
   "FOOTER_COPYRIGHT": "Copyright © 2026 Angular Blog Website.",
-  "HEADER_WORKS": "Header works!"
+  "HEADER_WORKS": "Header works!",
+
+  "IMAGE_ADDED": "Image uploaded!",
+  "IMAGE_ERROR": "Upload failed. Try again.",
+
+  "POST_ADDED": "Post created successfully!",
+  "POST_ERROR": "Failed to create post. Please try again."
 }

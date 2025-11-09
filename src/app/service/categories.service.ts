@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Timestamp } from 'firebase/firestore';
 
+//This service handles CRUD operations for categories in Firestore Database
 @Injectable({
   providedIn: 'root',
 })

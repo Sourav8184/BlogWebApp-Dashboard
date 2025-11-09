@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DEFAULT_POST_IMAGE } from 'src/app/constants/image-paths';
 import { Category, Post } from 'src/app/interfaces/categories.interfact';
 import { CategoriesService } from 'src/app/service/categories.service';
+import { PostService } from 'src/app/service/post.service';
 
 @Component({
   selector: 'app-new-post',
@@ -12,11 +13,13 @@ import { CategoriesService } from 'src/app/service/categories.service';
 export class NewPostComponent implements OnInit {
   postForm!: FormGroup;
   imgSrc: string = DEFAULT_POST_IMAGE;
+  selectedImageFile!: File;
   categories: Category[] = [];
 
   constructor(
     private readonly categoriesService: CategoriesService,
     private readonly fb: FormBuilder,
+    private readonly storage: PostService,
   ) {}
 
   ngOnInit(): void {
@@ -26,7 +29,7 @@ export class NewPostComponent implements OnInit {
       excerpt: ['', [Validators.required, Validators.maxLength(200)]],
       category: ['', Validators.required],
       content: ['', Validators.required],
-      imgPreview: ['', Validators.required],
+      imgPreview: [null, Validators.required],
     });
 
     this.loadCategories();
@@ -41,11 +44,13 @@ export class NewPostComponent implements OnInit {
   showPreview(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files[0]) {
+      // ✅ Save file for upload
+      this.selectedImageFile = input.files[0];
       const reader = new FileReader();
       reader.onload = (e: ProgressEvent<FileReader>) => {
         this.imgSrc = e.target?.result as string;
       };
-      reader.readAsDataURL(input.files[0]);
+      reader.readAsDataURL(this.selectedImageFile);
     }
   }
 
@@ -56,22 +61,28 @@ export class NewPostComponent implements OnInit {
   }
 
   submitPost(): void {
-    if (this.postForm.invalid) {
+    if (!this.selectedImageFile || this.postForm.invalid) {
       this.postForm.markAllAsTouched();
       return;
     }
 
-    const postData: Post = {
-      ...this.postForm.getRawValue(),
-      imagePath: '',
-      isFeatured: false,
-      views: 0,
-      status: 'new',
-      createdAt: new Date(),
-    };
+    this.storage.uploadImage(this.selectedImageFile).subscribe((imageURL) => {
+      const { imgPreview, ...formValues } = this.postForm.value;
+      const postData: Post = {
+        ...formValues,
+        imagePath: imageURL,
+        isFeatured: false,
+        views: 0,
+        status: 'new',
+        createdAt: new Date(),
+      };
 
-    // reset UI
-    this.postForm.reset();
-    this.imgSrc = DEFAULT_POST_IMAGE;
+      // ✅ Now save to Firestore
+      this.storage.createPost(postData);
+
+      // ✅ reset UI
+      this.postForm.reset();
+      this.imgSrc = DEFAULT_POST_IMAGE;
+    });
   }
 }
