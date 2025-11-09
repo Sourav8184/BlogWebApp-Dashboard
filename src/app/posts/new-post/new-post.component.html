@@ -91,7 +91,7 @@
               formControlName="category"
             >
               <option value="">{{ "POST_CATEGORY_SELECT" | translate }}</option>
-              <option *ngFor="let cat of categories" [value]="cat.id">
+              <option *ngFor="let cat of categories" [ngValue]="cat">
                 {{ cat.name }}
               </option>
             </select>
@@ -122,7 +122,18 @@
               class="form-control form-control-lg"
               accept="image/*"
               (change)="showPreview($event)"
+              formControlName="imgPreview"
             />
+
+            <small
+              class="text-danger"
+              *ngIf="
+                postForm.get('imgPreview')?.touched &&
+                postForm.get('imgPreview')?.invalid
+              "
+            >
+              Image is required.
+            </small>
           </div>
         </div>
       </div>

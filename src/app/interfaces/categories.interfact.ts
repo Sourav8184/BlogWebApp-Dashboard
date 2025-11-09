@@ -3,3 +3,16 @@ export interface Category {
   name: string;
   createdAt: Date;
 }
+
+export interface Post {
+  title: string;
+  permalink: string;
+  excerpt: string;
+  categoryId: Category;
+  content: string;
+  imagePath: string;
+  isFeatured: boolean;
+  views: number;
+  status: string;
+  createdAt: Date;
+}

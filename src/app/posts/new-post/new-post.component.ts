@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DEFAULT_POST_IMAGE } from 'src/app/constants/image-paths';
-import { Category } from 'src/app/interfaces/categories.interfact';
+import { Category, Post } from 'src/app/interfaces/categories.interfact';
 import { CategoriesService } from 'src/app/service/categories.service';
 
 @Component({
@@ -23,9 +23,10 @@ export class NewPostComponent implements OnInit {
     this.postForm = this.fb.group({
       title: ['', [Validators.required, Validators.minLength(5)]],
       permalink: [{ value: '', disabled: true }],
-      excerpt: ['', Validators.required, Validators.maxLength(200)],
+      excerpt: ['', [Validators.required, Validators.maxLength(200)]],
       category: ['', Validators.required],
       content: ['', Validators.required],
+      imgPreview: ['', Validators.required],
     });
 
     this.loadCategories();
@@ -60,12 +61,16 @@ export class NewPostComponent implements OnInit {
       return;
     }
 
-    const postData = {
+    const postData: Post = {
       ...this.postForm.getRawValue(),
-      imagePreview: this.imgSrc,
+      imagePath: '',
+      isFeatured: false,
+      views: 0,
+      status: 'new',
+      createdAt: new Date(),
     };
 
-    // You can remove reset if you don't want to clear UI
+    // reset UI
     this.postForm.reset();
     this.imgSrc = DEFAULT_POST_IMAGE;
   }
