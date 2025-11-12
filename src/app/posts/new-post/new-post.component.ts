@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DEFAULT_POST_IMAGE } from 'src/app/constants/image-paths';
-import { Category, Post } from 'src/app/interfaces/categories.interfact';
+import { Category } from 'src/app/interfaces/categories.interfact';
+import { Post } from 'src/app/interfaces/posts.interface';
 import { CategoriesService } from 'src/app/service/categories.service';
 import { PostService } from 'src/app/service/post.service';
 

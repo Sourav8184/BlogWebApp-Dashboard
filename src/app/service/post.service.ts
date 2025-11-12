@@ -5,7 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { finalize, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { Post } from '../interfaces/categories.interfact';
+import { Post } from '../interfaces/posts.interface';
 
 // This service handles post creation and image uploads
 @Injectable({
@@ -70,5 +70,19 @@ export class PostService {
           }),
         ),
       );
+  }
+
+  async deletePost(postId: string, imagePath?: string): Promise<void> {
+    try {
+      await this.firestore.collection('posts').doc(postId).delete();
+      if (imagePath) {
+        await this.storage.refFromURL(imagePath).delete().toPromise();
+      }
+
+      this.toastr.success(this.translate.instant('POST_DELETED'));
+    } catch (error) {
+      console.error('Error deleting post:', error);
+      this.toastr.error(this.translate.instant('POST_DELETE_ERROR'));
+    }
   }
 }

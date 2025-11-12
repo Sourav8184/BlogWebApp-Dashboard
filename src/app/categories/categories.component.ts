@@ -78,7 +78,7 @@ export class CategoriesComponent implements OnInit {
       await this.categoriesService.deleteCategory(category.id!);
       this.toastr.success(this.translate.instant('CATEGORY_DELETED'));
     } catch (error) {
-      this.toastr.error(this.translate.instant('CATEGORY_ERROR'));
+      this.toastr.error(this.translate.instant('CATEGORY_DELETED_ERROR'));
     } finally {
       this.isLoading = false;
     }

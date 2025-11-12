@@ -24,7 +24,12 @@
   "CATEGORY_UPDATED": "Category updated successfully!",
   "CATEGORY_DELETED": "Category deleted successfully!",
   "CATEGORY_EMPTY": "Please enter a category name.",
-  "CATEGORY_ERROR": "Something went wrong, please try again.",
+  "CATEGORY_DELETED_ERROR": "Unable to delete category. Please try again later.",
+  "POST_DELETED": "Post deleted successfully!",
+  "POST_DELETED_ERROR": "Unable to delete post. Please try again later.",
+  "CONFIRM_DELETE_TITLE": "Are you sure?",
+  "CONFIRM_DELETE_TEXT": "This post will be permanently deleted.",
+  "YES_DELETE": "Yes, delete it!",
 
   "DASH_CATEGORIES_TITLE": "Categories",
   "DASH_CATEGORIES_DESC": "Manage your category details here",

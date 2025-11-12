@@ -1,7 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PostService } from 'src/app/service/post.service';
-import { Post } from './../../interfaces/categories.interfact';
+import { Post } from './../../interfaces/posts.interface';
 import { Subject, takeUntil } from 'rxjs';
+import { SweetAlertService } from 'src/app/service/sweet-alert.service.ts.service';
 
 @Component({
   selector: 'app-all-post',
@@ -13,7 +14,10 @@ export class AllPostComponent implements OnInit, OnDestroy {
 
   private readonly destroy$ = new Subject<void>();
 
-  constructor(private readonly postService: PostService) {}
+  constructor(
+    private readonly postService: PostService,
+    private readonly swalService: SweetAlertService,
+  ) {}
 
   ngOnInit(): void {
     this.loadPosts();
@@ -34,7 +38,19 @@ export class AllPostComponent implements OnInit, OnDestroy {
   }
 
   onDeletePost(postId: string): void {
-    console.log('Delete post clicked:', postId);
+    this.swalService.confirmDelete().then((result) => {
+      if (result.isConfirmed) {
+        this.postService
+          .deletePost(postId)
+          .then(() => {
+            this.allPosts = this.allPosts.filter((post) => post.id !== postId);
+            this.swalService.success('POST_DELETED');
+          })
+          .catch(() => {
+            this.swalService.error('POST_DELETED_ERROR');
+          });
+      }
+    });
   }
 
   ngOnDestroy(): void {
