@@ -23,28 +23,4 @@ export class SweetAlertService {
       color: '#333',
     });
   }
-
-  success(messageKey: string): void {
-    void Swal.fire({
-      title: this.translate.instant(messageKey),
-      icon: 'success',
-      timer: 2000,
-      showConfirmButton: false,
-      background: '#fff',
-      color: '#333',
-      iconColor: '#2ecc71',
-    });
-  }
-
-  error(messageKey: string): void {
-    void Swal.fire({
-      title: this.translate.instant(messageKey),
-      icon: 'error',
-      confirmButtonText: this.translate.instant('OK'),
-      confirmButtonColor: '#e74c3c',
-      background: '#fff',
-      color: '#333',
-      iconColor: '#e74c3c',
-    });
-  }
 }

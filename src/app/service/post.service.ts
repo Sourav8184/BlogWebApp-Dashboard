@@ -81,7 +81,6 @@ export class PostService {
 
       this.toastr.success(this.translate.instant('POST_DELETED'));
     } catch (error) {
-      console.error('Error deleting post:', error);
       this.toastr.error(this.translate.instant('POST_DELETE_ERROR'));
     }
   }

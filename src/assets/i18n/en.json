@@ -1,41 +1,27 @@
 {
+  "ADD": "Add",
+  "UPDATE": "Update",
+  "CANCEL": "Cancel",
+  "EDIT": "Edit",
+  "DELETE": "Delete",
+  "NO": "No",
+  "ACTIONS": "Actions",
+  "DATE": "Date",
+
   "ADD_CATEGORY_TITLE": "Add Category",
   "UPDATE_CATEGORY_TITLE": "Update Category",
   "ADD_CATEGORY_SUBTITLE": "Create a category to organize your content",
   "UPDATE_CATEGORY_SUBTITLE": "Update the category details below.",
   "CATEGORY_PLACEHOLDER": "Enter category name",
-
-  "ADD": "Add",
-  "UPDATE": "Update",
-  "CANCEL": "Cancel",
-
-  "NO": "No",
-  "CATEGORY_NAME": "Name",
-  "DATE": "Date",
-  "ACTIONS": "Actions",
   "CATEGORY_LIST": "Category List",
+  "CATEGORY_NAME": "Name",
   "NO_CATEGORY": "No categories added yet.",
-  "NO_POSTS": "No post added yet.",
-
-  "EDIT": "Edit",
-  "DELETE": "Delete",
 
   "CATEGORY_ADDED": "Category added successfully!",
   "CATEGORY_UPDATED": "Category updated successfully!",
   "CATEGORY_DELETED": "Category deleted successfully!",
   "CATEGORY_EMPTY": "Please enter a category name.",
   "CATEGORY_DELETED_ERROR": "Unable to delete category. Please try again later.",
-  "POST_DELETED": "Post deleted successfully!",
-  "POST_DELETED_ERROR": "Unable to delete post. Please try again later.",
-  "CONFIRM_DELETE_TITLE": "Are you sure?",
-  "CONFIRM_DELETE_TEXT": "This post will be permanently deleted.",
-  "YES_DELETE": "Yes, delete it!",
-
-  "DASH_CATEGORIES_TITLE": "Categories",
-  "DASH_CATEGORIES_DESC": "Manage your category details here",
-
-  "DASH_POST_TITLE": "Post",
-  "DASH_POST_DESC": "Manage your post details here",
 
   "BLOG_POSTS_TITLE": "All Blog Posts",
   "BLOG_POSTS_SUBTITLE": "Manage and organize your blog posts here.",
@@ -43,6 +29,8 @@
   "BACK_TO_DASHBOARD": "Back to Dashboard",
 
   "ADD_NEW_POST_SUBTITLE": "Create and publish a new blog post below.",
+  "POST_LIST": "Post List",
+  "NO_POSTS": "No posts added yet.",
   "POST_TITLE": "Title",
   "POST_TITLE_PLACEHOLDER": "Enter your post title...",
   "POST_PERMALINK": "Permalink",
@@ -53,17 +41,28 @@
   "POST_CATEGORY_SELECT": "Select a category",
   "POST_IMAGE": "Image",
   "POST_CONTENT": "Content",
-  "POST_LIST": "Post List",
   "SAVE_POST": "Save Post",
   "BACK_TO_POSTS": "Back to Posts",
+
+  "POST_ADDED": "Post created successfully!",
+  "POST_ERROR": "Failed to create post. Please try again.",
+  "POST_DELETED": "Post deleted successfully!",
+  "POST_DELETE_ERROR": "Unable to delete post. Please try again later.",
+  "FETCH_POSTS_ERROR": "Unable to fetch posts. Please try again.",
+
+  "CONFIRM_DELETE_TITLE": "Are you sure?",
+  "CONFIRM_DELETE_TEXT": "This post will be permanently deleted.",
+  "YES_DELETE": "Yes, delete it!",
+
+  "DASH_CATEGORIES_TITLE": "Categories",
+  "DASH_CATEGORIES_DESC": "Manage your category details here",
+  "DASH_POST_TITLE": "Post",
+  "DASH_POST_DESC": "Manage your post details here",
 
   "SITE_LOGO": "Sourav's Blog",
   "FOOTER_COPYRIGHT": "Copyright © 2026 Angular Blog Website.",
   "HEADER_WORKS": "Header works!",
 
   "IMAGE_ADDED": "Image uploaded!",
-  "IMAGE_ERROR": "Upload failed. Try again.",
-
-  "POST_ADDED": "Post created successfully!",
-  "POST_ERROR": "Failed to create post. Please try again."
+  "IMAGE_ERROR": "Upload failed. Try again."
 }

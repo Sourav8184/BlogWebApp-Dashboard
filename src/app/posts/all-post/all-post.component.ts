@@ -44,10 +44,9 @@ export class AllPostComponent implements OnInit, OnDestroy {
           .deletePost(postId)
           .then(() => {
             this.allPosts = this.allPosts.filter((post) => post.id !== postId);
-            this.swalService.success('POST_DELETED');
           })
-          .catch(() => {
-            this.swalService.error('POST_DELETED_ERROR');
+          .catch((error) => {
+            console.error('Error while deleting post:', error);
           });
       }
     });
