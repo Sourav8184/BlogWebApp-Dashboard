@@ -8,7 +8,7 @@ export interface Post {
   title: string;
   permalink: string;
   excerpt: string;
-  categoryId: Category;
+  category: Category;
   content: string;
   imagePath: string;
   isFeatured: boolean;

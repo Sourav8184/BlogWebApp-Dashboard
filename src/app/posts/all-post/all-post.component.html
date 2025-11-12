@@ -29,4 +29,75 @@
       </div>
     </div>
   </div>
+
+  <div class="row mt-5 mb-5">
+    <div class="col-md-10 mx-auto">
+      <div
+        class="card shadow-effect category-table-card mt-5 mb-5 border-0 rounded-4"
+      >
+        <div class="card-body p-4">
+          <h5 class="fw-bold mb-4 text-center">
+            {{ "POST_LIST" | translate }}
+          </h5>
+
+          <div class="table-responsive">
+            <table class="table modern-table align-middle text-center">
+              <thead>
+                <tr>
+                  <th>{{ "NO" | translate }}</th>
+                  <th>{{ "POST_IMAGE" | translate }}</th>
+                  <th>{{ "POST_TITLE" | translate }}</th>
+                  <th>{{ "POST_EXCERPT" | translate }}</th>
+                  <th>{{ "POST_CATEGORY" | translate }}</th>
+                  <th>{{ "ACTIONS" | translate }}</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let post of allPosts; let i = index">
+                  <td>{{ i + 1 }}</td>
+                  <td>
+                    <div class="post-image-wrapper">
+                      <img [src]="post.imagePath" alt="Post Image" />
+                    </div>
+                  </td>
+                  <td class="fw-semibold">{{ post.title }}</td>
+                  <td class="text-muted">{{ post.excerpt }}</td>
+                  <td class="fw-semibold">{{ post.category.name }}</td>
+
+                  <td>
+                    <div
+                      class="d-flex justify-content-center align-items-center gap-2"
+                    >
+                      <button
+                        class="btn btn-sm btn-light shadow-sm table-action-btn"
+                        title="{{ 'EDIT' | translate }}"
+                        aria-label="Edit post"
+                      >
+                        <i class="fa-solid fa-pen"></i>
+                      </button>
+
+                      <button
+                        class="btn btn-sm btn-danger shadow-sm table-action-btn"
+                        title="{{ 'DELETE' | translate }}"
+                        aria-label="Delete post"
+                      >
+                        <i class="fa-solid fa-trash"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr *ngIf="allPosts.length === 0">
+                  <td colspan="7" class="text-center text-muted py-4">
+                    {{ "NO_POSTS" | translate }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
