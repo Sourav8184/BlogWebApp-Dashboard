@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
 import { CategoriesService } from '../service/categories.service';
+import { SweetAlertService } from '../service/sweet-alert.service.ts.service';
 
 @Component({
   selector: 'app-categories',
@@ -19,6 +20,7 @@ export class CategoriesComponent implements OnInit {
     private readonly categoriesService: CategoriesService,
     private readonly toastr: ToastrService,
     private readonly translate: TranslateService,
+    private readonly swalService: SweetAlertService,
   ) {}
 
   ngOnInit(): void {
@@ -72,16 +74,19 @@ export class CategoriesComponent implements OnInit {
   }
 
   async deleteCategory(category: Category) {
-    this.isLoading = true;
-
-    try {
-      await this.categoriesService.deleteCategory(category.id!);
-      this.toastr.success(this.translate.instant('CATEGORY_DELETED'));
-    } catch (error) {
-      this.toastr.error(this.translate.instant('CATEGORY_DELETED_ERROR'));
-    } finally {
-      this.isLoading = false;
-    }
+    this.swalService.confirmDelete().then(async (result) => {
+      if (result.isConfirmed) {
+        this.isLoading = true;
+        try {
+          await this.categoriesService.deleteCategory(category.id!);
+          this.toastr.success(this.translate.instant('CATEGORY_DELETED'));
+        } catch (error) {
+          this.toastr.error(this.translate.instant('CATEGORY_DELETED_ERROR'));
+        } finally {
+          this.isLoading = false;
+        }
+      }
+    });
   }
 
   editCategory(cat: Category) {

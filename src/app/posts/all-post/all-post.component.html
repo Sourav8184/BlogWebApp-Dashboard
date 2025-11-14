@@ -81,7 +81,7 @@
                         class="btn btn-sm btn-danger shadow-sm table-action-btn"
                         title="{{ 'DELETE' | translate }}"
                         aria-label="Delete post"
-                        (click)="onDeletePost(post.id!)"
+                        (click)="onDeletePost(post.id!, post.imagePath)"
                       >
                         <i class="fa-solid fa-trash"></i>
                       </button>

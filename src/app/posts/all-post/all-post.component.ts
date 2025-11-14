@@ -37,17 +37,10 @@ export class AllPostComponent implements OnInit, OnDestroy {
       });
   }
 
-  onDeletePost(postId: string): void {
+  onDeletePost(postId: string, imgPath: string): void {
     this.swalService.confirmDelete().then((result) => {
       if (result.isConfirmed) {
-        this.postService
-          .deletePost(postId)
-          .then(() => {
-            this.allPosts = this.allPosts.filter((post) => post.id !== postId);
-          })
-          .catch((error) => {
-            console.error('Error while deleting post:', error);
-          });
+        this.postService.deletePost(postId, imgPath);
       }
     });
   }

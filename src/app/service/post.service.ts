@@ -6,6 +6,7 @@ import { finalize, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Post } from '../interfaces/posts.interface';
+import { lastValueFrom } from 'rxjs';
 
 // This service handles post creation and image uploads
 @Injectable({
@@ -76,7 +77,7 @@ export class PostService {
     try {
       await this.firestore.collection('posts').doc(postId).delete();
       if (imagePath) {
-        await this.storage.refFromURL(imagePath).delete().toPromise();
+        await lastValueFrom(this.storage.refFromURL(imagePath).delete());
       }
 
       this.toastr.success(this.translate.instant('POST_DELETED'));
