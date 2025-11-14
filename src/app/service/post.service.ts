@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Post } from '../interfaces/posts.interface';
 import { lastValueFrom } from 'rxjs';
+import { Timestamp } from 'firebase/firestore';
 
 // This service handles post creation and image uploads
 @Injectable({
@@ -67,6 +68,9 @@ export class PostService {
           actions.map((doc) => {
             const id = doc.payload.doc.id;
             const data = doc.payload.doc.data();
+            if (data.createdAt instanceof Timestamp) {
+              data.createdAt = data.createdAt.toDate();
+            }
             return { id, ...data };
           }),
         ),

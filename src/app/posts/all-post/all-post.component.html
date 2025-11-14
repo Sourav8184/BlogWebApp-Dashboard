@@ -49,6 +49,7 @@
                   <th>{{ "POST_TITLE" | translate }}</th>
                   <th>{{ "POST_EXCERPT" | translate }}</th>
                   <th>{{ "POST_CATEGORY" | translate }}</th>
+                  <th>{{ "DATE" | translate }}</th>
                   <th>{{ "ACTIONS" | translate }}</th>
                 </tr>
               </thead>
@@ -64,6 +65,9 @@
                   <td class="fw-semibold">{{ post.title }}</td>
                   <td class="text-muted">{{ post.excerpt }}</td>
                   <td class="fw-semibold">{{ post.category.name }}</td>
+                  <td class="fw-semibold">
+                    {{ post.createdAt | date: "mediumDate" }}
+                  </td>
 
                   <td>
                     <div
