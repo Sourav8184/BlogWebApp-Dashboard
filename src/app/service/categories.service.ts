@@ -39,10 +39,10 @@ export class CategoriesService {
     id: string,
     updatedData: Partial<Category>,
   ): Promise<void> {
-    await this.firestore.doc(`categories/${id}`).update(updatedData);
+    await this.firestore.doc<Category>(`categories/${id}`).update(updatedData);
   }
 
   async deleteCategory(id: string): Promise<void> {
-    await this.firestore.doc(`categories/${id}`).delete();
+    await this.firestore.doc<Category>(`categories/${id}`).delete();
   }
 }

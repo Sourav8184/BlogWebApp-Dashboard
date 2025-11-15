@@ -11,6 +11,7 @@ const routes: Routes = [
 
   { path: 'posts', component: AllPostComponent },
   { path: 'posts/new', component: NewPostComponent },
+  { path: 'posts/edit/:id', component: NewPostComponent },
 ];
 
 @NgModule({

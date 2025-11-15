@@ -61,10 +61,33 @@ export class PostService {
   }
 
   async deletePost(postId: string, imagePath?: string): Promise<void> {
-    await this.firestore.collection('posts').doc(postId).delete();
+    await this.firestore.collection<Post>('posts').doc(postId).delete();
 
     if (imagePath) {
       await lastValueFrom(this.storage.refFromURL(imagePath).delete());
     }
+  }
+
+  async updatePost(id: string, updatedData: Partial<Post>): Promise<void> {
+    await this.firestore.collection<Post>('posts').doc(id).update(updatedData);
+  }
+
+  getPostById(id: string): Observable<Post | undefined> {
+    return this.firestore
+      .collection<Post>('posts')
+      .doc(id)
+      .snapshotChanges()
+      .pipe(
+        map((doc) => {
+          const data = doc.payload.data();
+          if (!data) return undefined;
+
+          if (data.createdAt instanceof Timestamp) {
+            data.createdAt = data.createdAt.toDate();
+          }
+
+          return { id: doc.payload.id, ...data };
+        }),
+      );
   }
 }
