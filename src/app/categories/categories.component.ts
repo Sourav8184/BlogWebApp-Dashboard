@@ -74,19 +74,17 @@ export class CategoriesComponent implements OnInit {
   }
 
   async deleteCategory(category: Category) {
-    this.swalService.confirmDelete().then(async (result) => {
-      if (result.isConfirmed) {
-        this.isLoading = true;
-        try {
-          await this.categoriesService.deleteCategory(category.id!);
-          this.toastr.success(this.translate.instant('CATEGORY_DELETED'));
-        } catch (error) {
-          this.toastr.error(this.translate.instant('CATEGORY_DELETED_ERROR'));
-        } finally {
-          this.isLoading = false;
-        }
-      }
-    });
+    const result = await this.swalService.confirmDelete();
+    if (!result.isConfirmed) return;
+    this.isLoading = true;
+    try {
+      await this.categoriesService.deleteCategory(category.id!);
+      this.toastr.success(this.translate.instant('CATEGORY_DELETED'));
+    } catch (error) {
+      this.toastr.error(this.translate.instant('CATEGORY_DELETED_ERROR'));
+    } finally {
+      this.isLoading = false;
+    }
   }
 
   editCategory(cat: Category) {

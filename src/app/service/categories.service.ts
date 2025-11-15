@@ -12,19 +12,20 @@ import { Timestamp } from 'firebase/firestore';
 export class CategoriesService {
   constructor(private firestore: AngularFirestore) {}
 
-  addCategory(category: Category) {
-    return this.firestore.collection('categories').add(category);
+  async addCategory(category: Category): Promise<void> {
+    await this.firestore.collection('categories').add(category);
   }
 
   getCategories(): Observable<Category[]> {
     return this.firestore
-      .collection('categories')
+      .collection<Category>('categories')
       .snapshotChanges()
       .pipe(
         map((actions) =>
           actions.map((doc) => {
             const id = doc.payload.doc.id;
             const data = doc.payload.doc.data() as Category;
+            // Convert Firestore Timestamp → JavaScript Date
             if (data.createdAt instanceof Timestamp) {
               data.createdAt = data.createdAt.toDate();
             }
@@ -34,11 +35,14 @@ export class CategoriesService {
       );
   }
 
-  editCategory(id: string, updatedData: Partial<Category>) {
-    return this.firestore.doc(`categories/${id}`).update(updatedData);
+  async editCategory(
+    id: string,
+    updatedData: Partial<Category>,
+  ): Promise<void> {
+    await this.firestore.doc(`categories/${id}`).update(updatedData);
   }
 
-  deleteCategory(id: string) {
-    return this.firestore.doc(`categories/${id}`).delete();
+  async deleteCategory(id: string): Promise<void> {
+    await this.firestore.doc(`categories/${id}`).delete();
   }
 }

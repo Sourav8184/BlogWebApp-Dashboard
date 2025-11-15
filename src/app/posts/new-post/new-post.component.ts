@@ -5,6 +5,8 @@ import { Category } from 'src/app/interfaces/categories.interfact';
 import { Post } from 'src/app/interfaces/posts.interface';
 import { CategoriesService } from 'src/app/service/categories.service';
 import { PostService } from 'src/app/service/post.service';
+import { ToastrService } from 'ngx-toastr';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-new-post',
@@ -21,6 +23,8 @@ export class NewPostComponent implements OnInit {
     private readonly categoriesService: CategoriesService,
     private readonly fb: FormBuilder,
     private readonly storage: PostService,
+    private readonly toastr: ToastrService,
+    private readonly translate: TranslateService,
   ) {}
 
   ngOnInit(): void {
@@ -67,23 +71,34 @@ export class NewPostComponent implements OnInit {
       return;
     }
 
-    this.storage.uploadImage(this.selectedImageFile).subscribe((imageURL) => {
-      const { imgPreview, ...formValues } = this.postForm.value;
-      const postData: Post = {
-        ...formValues,
-        imagePath: imageURL,
-        isFeatured: false,
-        views: 0,
-        status: 'new',
-        createdAt: new Date(),
-      };
+    this.storage.uploadImage(this.selectedImageFile).subscribe({
+      next: async (imageURL) => {
+        const { imgPreview, ...formValues } = this.postForm.value;
+        const postData: Post = {
+          ...formValues,
+          imagePath: imageURL,
+          isFeatured: false,
+          views: 0,
+          status: 'new',
+          createdAt: new Date(),
+        };
 
-      // ✅ Now save to Firestore
-      this.storage.createPost(postData);
+        // ✅ Now save to Firestore
+        try {
+          await this.storage.createPost(postData);
+          this.toastr.success(this.translate.instant('POST_ADDED'));
+        } catch {
+          this.toastr.error(this.translate.instant('POST_ERROR'));
+        }
 
-      // ✅ reset UI
-      this.postForm.reset();
-      this.imgSrc = DEFAULT_POST_IMAGE;
+        // ✅ reset UI
+        this.postForm.reset();
+        this.imgSrc = DEFAULT_POST_IMAGE;
+      },
+
+      error: () => {
+        this.toastr.error(this.translate.instant('IMAGE_ERROR'));
+      },
     });
   }
 }

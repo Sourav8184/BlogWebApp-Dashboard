@@ -3,6 +3,8 @@ import { PostService } from 'src/app/service/post.service';
 import { Post } from './../../interfaces/posts.interface';
 import { Subject, takeUntil } from 'rxjs';
 import { SweetAlertService } from 'src/app/service/sweet-alert.service.ts.service';
+import { ToastrService } from 'ngx-toastr';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-all-post',
@@ -17,6 +19,8 @@ export class AllPostComponent implements OnInit, OnDestroy {
   constructor(
     private readonly postService: PostService,
     private readonly swalService: SweetAlertService,
+    private readonly toastr: ToastrService,
+    private readonly translate: TranslateService,
   ) {}
 
   ngOnInit(): void {
@@ -28,19 +32,20 @@ export class AllPostComponent implements OnInit, OnDestroy {
       .getPosts()
       .pipe(takeUntil(this.destroy$))
       .subscribe({
-        next: (posts) => {
-          this.allPosts = posts || [];
-        },
-        error: (err) => {
-          console.error('Error fetching posts:', err);
-        },
+        next: (posts: Post[]) => (this.allPosts = posts),
+        error: () =>
+          this.toastr.error(this.translate.instant('FETCH_POSTS_ERROR')),
       });
   }
 
   onDeletePost(postId: string, imgPath: string): void {
-    this.swalService.confirmDelete().then((result) => {
-      if (result.isConfirmed) {
-        this.postService.deletePost(postId, imgPath);
+    this.swalService.confirmDelete().then(async (result) => {
+      if (!result.isConfirmed) return;
+      try {
+        await this.postService.deletePost(postId, imgPath);
+        this.toastr.success(this.translate.instant('POST_DELETED'));
+      } catch {
+        this.toastr.error(this.translate.instant('POST_DELETE_ERROR'));
       }
     });
   }
