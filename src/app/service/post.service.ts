@@ -38,6 +38,11 @@ export class PostService {
     });
   }
 
+  async deleteImageByUrl(imageUrl: string): Promise<void> {
+    if (!imageUrl) return;
+    await lastValueFrom(this.storage.refFromURL(imageUrl).delete());
+  }
+
   async createPost(postData: Post): Promise<void> {
     await this.firestore.collection<Post>('posts').add(postData);
   }
