@@ -43,6 +43,7 @@
   "POST_CONTENT": "Content",
   "SAVE_POST": "Save Post",
   "BACK_TO_POSTS": "Back to Posts",
+  "POST_UPDATED": "Post updated successfully!",
 
   "POST_ADDED": "Post created successfully!",
   "POST_ERROR": "Failed to create post. Please try again.",
