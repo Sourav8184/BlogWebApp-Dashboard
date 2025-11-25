@@ -65,5 +65,12 @@
   "HEADER_WORKS": "Header works!",
 
   "IMAGE_ADDED": "Image uploaded!",
-  "IMAGE_ERROR": "Upload failed. Try again."
+  "IMAGE_ERROR": "Upload failed. Try again.",
+
+  "FEATURE": "Feature",
+  "REMOVE_FEATURED": "Remove Featured",
+  "POST_FEATURED": "Post marked as featured.",
+  "FEATURE_ERROR": "Failed to feature the post.",
+  "FEATURE_REMOVED": "Post removed from featured.",
+  "FEATURE_REMOVE_ERROR": "Failed to remove featured status."
 }

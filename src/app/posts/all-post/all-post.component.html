@@ -75,8 +75,8 @@
                     >
                       <button
                         class="btn btn-sm btn-light shadow-sm table-action-btn"
-                        title="{{ 'EDIT' | translate }}"
                         aria-label="Edit post"
+                        [attr.tooltip]="'EDIT' | translate"
                         [routerLink]="['/posts/edit', post.id]"
                       >
                         <i class="fa-solid fa-pen"></i>
@@ -84,11 +84,31 @@
 
                       <button
                         class="btn btn-sm btn-danger shadow-sm table-action-btn"
-                        title="{{ 'DELETE' | translate }}"
                         aria-label="Delete post"
+                        [attr.tooltip]="'DELETE' | translate"
                         (click)="onDeletePost(post.id!, post.imagePath)"
                       >
                         <i class="fa-solid fa-trash"></i>
+                      </button>
+
+                      <button
+                        *ngIf="!post.isFeatured"
+                        class="btn btn-sm btn-warning shadow-sm table-action-btn"
+                        aria-label="Feature post"
+                        [attr.tooltip]="'FEATURE' | translate"
+                        (click)="onFeaturePost(post)"
+                      >
+                        ⭐
+                      </button>
+
+                      <button
+                        *ngIf="post.isFeatured"
+                        class="btn btn-sm shadow-sm table-action-btn no-bg-btn"
+                        aria-label="Remove featured"
+                        [attr.tooltip]="'REMOVE_FEATURED' | translate"
+                        (click)="onRemoveFeatured(post)"
+                      >
+                        ❌
                       </button>
                     </div>
                   </td>

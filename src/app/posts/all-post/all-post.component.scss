@@ -134,13 +134,66 @@
   .table-action-btn {
     border-radius: 8px;
     padding: 6px 10px;
+    position: relative;
     transition: transform 0.2s ease;
 
-    i {
-      font-size: 0.9rem;
+    &:hover {
+      transform: scale(1.1);
     }
 
+    /* TOOLTIP */
+    &[tooltip] {
+      &::after,
+      &::before {
+        opacity: 0;
+        visibility: hidden;
+        position: absolute;
+        pointer-events: none;
+        transition: 0.15s ease-in-out;
+        z-index: 9999;
+      }
+
+      /* tooltip bubble */
+      &::after {
+        content: attr(tooltip);
+        bottom: 140%;
+        left: 50%;
+        transform: translateX(-50%) translateY(8px);
+        padding: 6px 10px;
+        border-radius: 6px;
+        font-size: 12px;
+        background: #2d2d2d;
+        color: #fff;
+        white-space: nowrap;
+      }
+
+      /* tooltip arrow */
+      &::before {
+        content: "";
+        bottom: 125%;
+        left: 50%;
+        transform: translateX(-50%);
+        border: 6px solid transparent;
+        border-top-color: #2d2d2d;
+      }
+
+      /* HOVER STATE */
+      &:hover::after,
+      &:hover::before {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(0);
+      }
+    }
+  }
+
+  .no-bg-btn {
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+
     &:hover {
+      background-color: #f1f3f5 !important;
       transform: scale(1.1);
     }
   }

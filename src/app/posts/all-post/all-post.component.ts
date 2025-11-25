@@ -50,6 +50,26 @@ export class AllPostComponent implements OnInit, OnDestroy {
     });
   }
 
+  async onFeaturePost(post: Post) {
+    try {
+      await this.postService.updatePost(post.id!, { isFeatured: true });
+      post.isFeatured = true;
+      this.toastr.success(this.translate.instant('POST_FEATURED'));
+    } catch {
+      this.toastr.error(this.translate.instant('FEATURE_ERROR'));
+    }
+  }
+
+  async onRemoveFeatured(post: Post) {
+    try {
+      await this.postService.updatePost(post.id!, { isFeatured: false });
+      post.isFeatured = false;
+      this.toastr.success(this.translate.instant('FEATURE_REMOVED'));
+    } catch {
+      this.toastr.error(this.translate.instant('FEATURE_REMOVE_ERROR'));
+    }
+  }
+
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
