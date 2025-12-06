@@ -1,0 +1,85 @@
+<div class="login-wrapper d-flex justify-content-center align-items-center">
+  <div class="login-card shadow-lg">
+    <div class="text-center mb-3">
+      <h2 class="fw-bold text-primary-custom mb-1">Welcome Back</h2>
+      <p class="text-muted small">
+        Login to your admin panel and manage your blog.
+      </p>
+    </div>
+
+    <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+      <!-- EMAIL -->
+      <div class="form-group mb-3">
+        <label class="form-label small text-muted">Email</label>
+
+        <input
+          type="email"
+          class="form-control form-control-custom"
+          placeholder="Enter your email"
+          name="email"
+          ngModel
+          required
+          email
+          #Email="ngModel"
+        />
+
+        <!-- Email Errors -->
+        <div
+          *ngIf="Email.invalid && Email.touched"
+          class="text-danger small mt-1"
+        >
+          <span *ngIf="Email.errors?.['required']">Email is required.</span>
+          <span *ngIf="Email.errors?.['email']"
+            >Enter a valid email address.</span
+          >
+        </div>
+      </div>
+
+      <!-- PASSWORD -->
+      <div class="form-group mb-3">
+        <label class="form-label small text-muted">Password</label>
+
+        <input
+          type="password"
+          class="form-control form-control-custom"
+          placeholder="Enter your password"
+          name="password"
+          ngModel
+          required
+          minlength="6"
+          #Password="ngModel"
+        />
+
+        <!-- Password Errors -->
+        <div
+          *ngIf="Password.invalid && Password.touched"
+          class="text-danger small mt-1"
+        >
+          <span *ngIf="Password.errors?.['required']"
+            >Password is required.</span
+          >
+          <span *ngIf="Password.errors?.['minlength']"
+            >Password must be at least 6 characters.</span
+          >
+        </div>
+      </div>
+
+      <!-- SUBMIT BUTTON -->
+      <button
+        type="submit"
+        class="btn btn-gradient w-100 py-2"
+        [disabled]="loginForm.invalid"
+      >
+        Login
+      </button>
+    </form>
+
+    <!-- FOOTER -->
+    <p class="text-center mt-3 small text-muted">
+      Don't have an account?
+      <a href="#" class="text-primary-custom fw-bold text-decoration-none">
+        Sign Up
+      </a>
+    </p>
+  </div>
+</div>

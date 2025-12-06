@@ -72,5 +72,11 @@
   "POST_FEATURED": "Post marked as featured.",
   "FEATURE_ERROR": "Failed to feature the post.",
   "FEATURE_REMOVED": "Post removed from featured.",
-  "FEATURE_REMOVE_ERROR": "Failed to remove featured status."
+  "FEATURE_REMOVE_ERROR": "Failed to remove featured status.",
+
+  "LOGIN_SUCCESS": "LOGIN SUCCESSFUL!",
+  "LOGIN_FAILED": "LOGIN FAILED!",
+
+  "LOGOUT_SUCCESS": "You have logged out successfully",
+  "LOGOUT_FAILED": "Logout failed! Please try again."
 }

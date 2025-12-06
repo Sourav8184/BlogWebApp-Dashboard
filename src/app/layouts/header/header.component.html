@@ -1,9 +1,27 @@
 <header class="navbar navbar-expand-lg fixed-top bg-white">
-  <div class="container justify-content-center">
-    <a href="#" class="site-logo">
+  <div class="container d-flex align-items-center position-relative">
+    <div class="spacer"></div>
+
+    <a
+      class="site-logo position-absolute start-50 translate-middle-x text-center"
+    >
       {{ "SITE_LOGO" | translate }}
     </a>
+
+    <div class="spacer text-end">
+      <ng-container *ngIf="userEmail">
+        <div class="user-chip me-3">
+          <div class="avatar-circle">
+            {{ userEmail[0] | uppercase }}
+          </div>
+          <span class="chip-email">{{ userEmail }}</span>
+        </div>
+
+        <button class="auth-btn logout-btn" (click)="logout()">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+          Logout
+        </button>
+      </ng-container>
+    </div>
   </div>
 </header>
-
-<p>{{ "HEADER_WORKS" | translate }}</p>
