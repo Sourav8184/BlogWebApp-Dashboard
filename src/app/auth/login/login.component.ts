@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/service/auth.service';
+import { filter, take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +22,17 @@ export class LoginComponent implements OnInit {
     private readonly translate: TranslateService,
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // If user is already authenticated, redirect away from login page
+    this.authService
+      .getUser()
+      .pipe(take(1))
+      .subscribe((user) => {
+        if (user) {
+          this.router.navigate(['/'], { replaceUrl: true });
+        }
+      });
+  }
 
   onSubmit(form: NgForm) {
     if (form.invalid) return;
@@ -36,7 +47,16 @@ export class LoginComponent implements OnInit {
       .then(() => {
         this.loading = false;
         this.toastr.success(this.translate.instant('LOGIN_SUCCESS'));
-        this.router.navigate(['/']);
+        // Wait for authState to emit then navigate and replace the history entry
+        this.authService
+          .getUser()
+          .pipe(
+            filter((u) => !!u),
+            take(1),
+          )
+          .subscribe(() => {
+            this.router.navigate(['/'], { replaceUrl: true });
+          });
       })
       .catch((err) => {
         this.loading = false;

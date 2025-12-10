@@ -78,5 +78,7 @@
   "LOGIN_FAILED": "LOGIN FAILED!",
 
   "LOGOUT_SUCCESS": "You have logged out successfully",
-  "LOGOUT_FAILED": "Logout failed! Please try again."
+  "LOGOUT_FAILED": "Logout failed! Please try again.",
+
+  "LOGIN_PERMISSION": "You do not have permission to access this page."
 }
