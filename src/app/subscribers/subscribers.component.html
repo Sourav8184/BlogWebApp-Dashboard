@@ -1,0 +1,84 @@
+<div class="container py-5">
+  <!-- HEADER CARD -->
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <div class="card shadow-effect bg-secondary-theme border-0 rounded-4">
+        <div class="card-body text-center py-5">
+          <h3 class="fw-bold mb-2">
+            {{ "USER_EXPORT_TITLE" | translate }}
+          </h3>
+
+          <p class="text-muted mb-4">
+            {{ "USER_EXPORT_SUBTITLE" | translate }}
+          </p>
+
+          <div class="d-flex justify-content-center gap-3">
+            <button class="btn btn-theme-light btn-lg px-4" routerLink="/">
+              <i class="fa-solid fa-arrow-left me-2"></i>
+              {{ "BACK_TO_DASHBOARD" | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- USER TABLE -->
+  <div class="row mt-5 mb-5">
+    <div class="col-md-10 mx-auto">
+      <div class="card shadow-effect category-table-card border-0 rounded-4">
+        <div class="card-body p-4">
+          <h5 class="fw-bold mb-4 text-center">
+            {{ "USER_LIST" | translate }}
+          </h5>
+
+          <div class="table-responsive">
+            <table class="table modern-table align-middle text-center">
+              <thead>
+                <tr>
+                  <th>{{ "NO" | translate }}</th>
+                  <th>{{ "USER_NAME" | translate }}</th>
+                  <th>{{ "USER_EMAIL" | translate }}</th>
+                  <th>{{ "CREATED_DATE" | translate }}</th>
+                  <th>{{ "ACTIONS" | translate }}</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let user of users; let i = index">
+                  <td>{{ i + 1 }}</td>
+                  <td class="fw-semibold">{{ user.name }}</td>
+                  <td class="text-muted">{{ user.email }}</td>
+                  <td class="fw-semibold">
+                    {{ user.createdAt | date: "mediumDate" }}
+                  </td>
+
+                  <td>
+                    <div class="d-flex justify-content-center gap-2">
+                      <button
+                        class="btn btn-sm btn-danger shadow-sm table-action-btn delete-btn"
+                        title="{{ 'DELETE' | translate }}"
+                        (click)="onDeleteUser(user.id!)"
+                      >
+                        <i class="fa-solid fa-trash"></i>
+                        <span class="visually-hidden">{{
+                          "DELETE" | translate
+                        }}</span>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr *ngIf="users.length === 0">
+                  <td colspan="5" class="text-center text-muted py-4">
+                    {{ "NO_USERS_FOUND" | translate }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

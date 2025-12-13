@@ -6,6 +6,7 @@ import { AllPostComponent } from './posts/all-post/all-post.component';
 import { NewPostComponent } from './posts/new-post/new-post.component';
 import { LoginComponent } from './auth/login/login.component';
 import { AuthGuard } from './service/auth.guard';
+import { SubscribersComponent } from './subscribers/subscribers.component';
 
 const routes: Routes = [
   {
@@ -40,6 +41,12 @@ const routes: Routes = [
   {
     path: 'posts/edit/:id',
     component: NewPostComponent,
+    canActivate: [AuthGuard],
+  },
+
+  {
+    path: 'subscribers',
+    component: SubscribersComponent,
     canActivate: [AuthGuard],
   },
 ];

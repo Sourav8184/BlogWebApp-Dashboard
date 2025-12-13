@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-3 mb-3">
+    <div class="col-md-6 mb-3">
       <div class="dash-card text-center" routerLink="/categories">
         <div class="dash-icon mb-3">
           <i class="fa-solid fa-clipboard-list"></i>
@@ -16,7 +16,7 @@
       </div>
     </div>
 
-    <div class="col-md-3 mb-3">
+    <div class="col-md-6 mb-3">
       <div class="dash-card text-center" routerLink="/posts">
         <div class="dash-icon mb-3">
           <i class="fa-solid fa-file-image"></i>
@@ -28,6 +28,22 @@
 
         <p class="dash-desc">
           {{ "DASH_POST_DESC" | translate }}
+        </p>
+      </div>
+    </div>
+
+    <div class="col-md-6 mb-3">
+      <div class="dash-card text-center" routerLink="/subscribers">
+        <div class="dash-icon mb-3">
+          <i class="fa-solid fa-users"></i>
+        </div>
+
+        <h4 class="dash-title">
+          {{ "DASH_SUB_TITLE" | translate }}
+        </h4>
+
+        <p class="dash-desc">
+          {{ "DASH_SUB_DESC" | translate }}
         </p>
       </div>
     </div>

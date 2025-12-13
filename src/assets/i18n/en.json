@@ -80,5 +80,16 @@
   "LOGOUT_SUCCESS": "You have logged out successfully",
   "LOGOUT_FAILED": "Logout failed! Please try again.",
 
-  "LOGIN_PERMISSION": "You do not have permission to access this page."
+  "LOGIN_PERMISSION": "You do not have permission to access this page.",
+
+  "DASH_SUB_TITLE": "Subscribers",
+  "DASH_SUB_DESC": "Manage your subscriber details here",
+  "USER_EXPORT_TITLE": "All Subscribers",
+  "USER_EXPORT_SUBTITLE": "View and manage all registered Subscribers.",
+  "USER_LIST": "Registered Users",
+  "USER_NAME": "Name",
+  "USER_EMAIL": "Email",
+  "USER_DATE": "Created On",
+  "NO_USERS_FOUND": "No users found.",
+  "VIEW": "View"
 }
